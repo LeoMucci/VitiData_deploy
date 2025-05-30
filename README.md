@@ -1,114 +1,218 @@
-# 📊 Scraper de Importação de Uvas e Derivados - Embrapa
+# 🍇 VitiData API - Sistema de Análise de Dados Vitivinícolas
 
-Este projeto coleta automaticamente os dados da aba **Importação** do site da [Embrapa - Vitibrasil](http://vitibrasil.cnpuv.embrapa.br) para diferentes produtos derivados de uva, como vinhos, espumantes e sucos. Os dados são salvos em arquivos `.csv`, organizados por categoria e ano.
+[![Python](https://img.shields.io/badge/Python-3.11-blue.svg)](https://python.org)
+[![FastAPI](https://img.shields.io/badge/FastAPI-Latest-green.svg)](https://fastapi.tiangolo.com)
+[![Docker](https://img.shields.io/badge/Docker-Enabled-blue.svg)](https://docker.com)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-## 🔧 Tecnologias utilizadas
+## 📋 Sobre o Projeto
 
-- Python 3.10+
-- Selenium
-- BeautifulSoup
-- Pandas
+O **VitiData API** é uma solução completa para coleta, processamento e disponibilização de dados de vitivinicultura do Brasil, desenvolvida como parte do **Tech Challenge - Fase 1** do curso de Machine Learning Engineering. 
 
-## 📁 Estrutura do projeto
+Este sistema extrai dados em tempo real do portal [Embrapa VitiBrasil](http://vitibrasil.cnpuv.embrapa.br), transformando informações dispersas em uma API REST estruturada e documentada, pronta para alimentar modelos de Machine Learning e análises estratégicas do setor vitivinícola.
 
+### 🎯 Objetivos do Projeto
+
+- **Democratizar o acesso** aos dados oficiais de vitivinicultura brasileira
+- **Criar uma fonte confiável** para análises de mercado e pesquisas acadêmicas  
+- **Estabelecer base de dados** para futuros modelos de Machine Learning
+- **Facilitar integração** com sistemas de BI e dashboards analíticos
+
+---
+
+## 🏗️ Arquitetura da Solução
+
+```mermaid
+graph TB
+    A[Embrapa VitiBrasil] --> B[Web Scraper]
+    B --> C[Data Processing]
+    C --> D[FastAPI REST Endpoints]
+    D --> E[Machine Learning Models]
+    D --> F[Business Intelligence]
+    D --> G[Data Analytics]
 ```
-📦 dadosImportacao/
-┣ 📄 vinhosDeMesa.csv
-┣ 📄 espumantes.csv
-...
-📄 importacao_embrapa_final_estruturado.ipynb
-📄 README.md
+
+### Componentes Principais:
+
+1. **Web Scraper**: Selenium + BeautifulSoup para extração automatizada
+2. **Data Processing**: Pandas para limpeza e estruturação dos dados
+3. **REST API**: FastAPI para exposição dos endpoints
+4. **Containerização**: Docker para padronização de ambiente
+5. **Deploy**: Render para hospedagem em nuvem
+
+---
+
+## 🔧 Stack Tecnológica
+
+| Categoria | Tecnologia | Versão | Propósito |
+|-----------|------------|---------|-----------|
+| **Backend** | Python | 3.11 | Linguagem principal |
+| **API Framework** | FastAPI | Latest | Framework web moderno |
+| **Web Server** | Uvicorn | Latest | Servidor ASGI |
+| **Web Scraping** | Selenium | Latest | Automação de navegador |
+| **HTML Parsing** | BeautifulSoup4 | Latest | Extração de dados HTML |
+| **Data Processing** | Pandas | Latest | Manipulação de dados |
+| **Containerização** | Docker | Latest | Ambiente padronizado |
+| **Deploy** | Render | - | Plataforma de hospedagem |
+
+---
+
+## 📊 Endpoints Disponíveis
+
+### Base URL: `https://your-app-name.onrender.com`
+
+| Método | Endpoint | Descrição | Dados Retornados |
+|--------|----------|-----------|------------------|
+| `GET` | `/` | Página inicial da API | Informações básicas |
+| `GET` | `/healthz` | Health check do serviço | Status da aplicação |
+| `GET` | `/producao` | Dados de produção vinícola | Produção por região/ano |
+| `GET` | `/processamento` | Dados de processamento | Volume processado |
+| `GET` | `/comercializacao` | Dados de comercialização | Vendas no mercado interno |
+| `GET` | `/importacao` | Dados de importação | Produtos importados |
+| `GET` | `/exportacao` | Dados de exportação | Produtos exportados |
+| `GET` | `/docs` | Documentação interativa | Swagger UI |
+| `GET` | `/redoc` | Documentação alternativa | ReDoc UI |
+
+### 📝 Exemplo de Resposta
+
+```json
+{
+  "status": "success",
+  "data": [
+    {
+      "ano": 2023,
+      "produto": "Vinho de Mesa",
+      "quantidade": 123456789,
+      "unidade": "litros"
+    }
+  ],
+  "total_records": 150,
+  "source": "Embrapa VitiBrasil",
+  "last_updated": "2024-03-15T10:30:00Z"
+}
 ```
 
-## 🚀 Como executar
+---
 
-1. Clone este repositório
-2. Instale as dependências:
+## 🚀 Guia de Instalação e Uso
 
+### Pré-requisitos
+
+- Python 3.11+
+- Git
+- Docker (opcional)
+
+### 💻 Instalação Local
+
+1. **Clone o repositório**
+```bash
+git clone https://github.com/seu-usuario/VitiData.git
+cd VitiData
+```
+
+2. **Configure o ambiente virtual**
+```bash
+python -m venv venv
+source venv/bin/activate  # Linux/Mac
+# ou
+venv\Scripts\activate     # Windows
+```
+
+3. **Instale as dependências**
 ```bash
 pip install -r requirements.txt
 ```
 
-3. Execute o script Python (`.py`) ou utilize o Jupyter Notebook:
-
+4. **Execute a aplicação**
 ```bash
-python importacao.py
+uvicorn run:app --reload --host 0.0.0.0 --port 8000
 ```
 
-ou abra no Jupyter:
+5. **Acesse a documentação**
+   - Swagger UI: [http://localhost:8000/docs](http://localhost:8000/docs)
+   - ReDoc: [http://localhost:8000/redoc](http://localhost:8000/redoc)
+
+### 🐳 Execução com Docker
 
 ```bash
-jupyter notebook importacao_embrapa_final_estruturado.ipynb
+# Build da imagem
+docker build -t vitidata-api .
+
+# Execução do container
+docker run -d -p 8000:8000 --name vitidata vitidata-api
+
+# Verificar logs
+docker logs vitidata
 ```
 
-## ✅ Opções de anos disponíveis
+### ☁️ Acesso em Produção
 
-Ao rodar o script, você poderá escolher:
+A API está disponível em produção através do Render:
 
-- `1` → Último ano (2024)
-- `2` → Um ano específico (ex: 2015)
-- `3` → Últimos 5 anos
-- `4` → Últimos 10 anos
-- `5` → Todos os anos (1970 a 2024)
+**URL Base**: `https://vitidata-api.onrender.com`
 
-## 📦 Produtos disponíveis
-
-- Vinhos de Mesa
-- Espumantes
-- Uvas Frescas
-- Uvas Passas
-- Suco de Uva
-
-## 📌 Observações
-
-- O site da Embrapa utiliza HTTP e não HTTPS, por isso o navegador é configurado para aceitar conexões inseguras.
-- O scraping é realizado com `Selenium` em modo headless.
+**Documentação**: `https://vitidata-api.onrender.com/docs`
 
 ---
-# Scraping de Dados de Processamento da Embrapa
-
-Este projeto realiza o scraping da página da Embrapa com dados de **uvas processadas no Rio Grande do Sul**, disponíveis no site do projeto VitiBrasil: [http://vitibrasil.cnpuv.embrapa.br/](http://vitibrasil.cnpuv.embrapa.br/).
-
-Os dados coletados abrangem os anos de **1970 até o ano atual**, e são extraídos da aba "Processamento" (opção `opt_03` do site).
 
 ## 📁 Estrutura do Projeto
 
 ```
-SCRAPING_PROCESSAMENTO/
-├── env/                              # Ambiente virtual (não versionado)
-├── dados_processamento_embrapa.csv  # Arquivo gerado com os dados raspados
-├── processamento.ipynb              # Notebook com o código de scraping
-├── requirements.txt                 # Lista de dependências do projeto
-├── .gitignore                       # Arquivos/pastas ignorados pelo Git
-└── README.md                        # Documentação do projeto
+VitiData/
+├── 📁 app/                     # Módulo principal da aplicação
+│   ├── 📄 __init__.py         # Inicialização do módulo
+│   ├── 📄 scraper.py          # Funções de web scraping
+│   ├── 📄 models.py           # Modelos de dados (Pydantic)
+│   └── 📄 utils.py            # Funções utilitárias
+├── 📄 run.py                   # Aplicação FastAPI principal
+├── 📄 requirements.txt         # Dependências Python
+├── 📄 Dockerfile              # Configuração Docker
+├── 📄 .gitignore              # Arquivos ignorados pelo Git
+└── 📄 README.md               # Este arquivo
 ```
 
-## ▶️ Como Executar
+---
 
-1. Clone o repositório ou baixe os arquivos.
 
-2. Crie e ative o ambiente virtual:
+## 🧪 Testes e Validação
 
-   ```bash
-   python -m venv env  # Criar ambiente virtual
-   source env/bin/activate        # Ativar no Linux/Mac
-   env\Scripts\activate         # Ativar no Windows
-   ```
+### Executar Testes
 
-3. Instale as dependências:
+```bash
+# Instalar dependências de teste
+pip install pytest pytest-asyncio httpx
 
-   ```bash
-   pip install -r requirements.txt
-   ```
+# Executar todos os testes
+pytest
 
-4. Execute o notebook `processamento.ipynb` no Jupyter ou no VS Code.
+# Executar com cobertura
+pytest --cov=app
+```
 
-5. O arquivo `dados_processamento_embrapa.csv` será gerado automaticamente com os dados raspados.
+### Teste Manual dos Endpoints
 
-## 🛠️ Tecnologias Utilizadas
+```bash
+# Verificar saúde da API
+curl https://vitidata-api.onrender.com/healthz
 
-- Python 3
-- Jupyter Notebook
-- BeautifulSoup4
-- Requests
-- Pandas
+# Obter dados de produção
+curl https://vitidata-api.onrender.com/producao
+```
+
+---
+
+
+## 📄 Licença
+
+Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICENSE) para detalhes.
+
+---
+
+## 👨‍💻 Autores
+
+**Matheus Pavani**
+- GitHub: [@seu-usuario](https://github.com/seu-usuario)
+- LinkedIn: [Seu Perfil](https://linkedin.com/in/seu-perfil)
+- Email: seu-email@exemplo.com
+
+---
