@@ -6,8 +6,11 @@ from app.scraper import (
     scrape_importacao,
     scrape_comercializacao_page
 )
+from app.routes import routes  
 
 app = FastAPI(title="VitiData API")
+
+app.include_router(routes.router)  
 
 @app.get("/healthz")
 def health():
