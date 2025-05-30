@@ -23,10 +23,10 @@ def salvar_csv(nome_arquivo: str, dados: List[dict]):
     df = pd.DataFrame(dados)
     df.to_csv(nome_arquivo, index=False)
 
-@app.get("/producao", response_model=List[VinhoEntrada], summary="Dados de Produção")
+@app.get("/producao", response_model=List[VinhoEntrada])
 def producao(background_tasks: BackgroundTasks):
     dados = scrape_producao_pages()
-    background_tasks.add_task(salvar_csv, "dadosProducao.csv", dados)
+    background_tasks.add_task(salvar_csv , "producao.csv", dados)
     return dados
 
 @app.get("/exportacao", response_model=List[ComercioEntrada], summary="Dados de Exportação")
@@ -47,8 +47,9 @@ def importacao(background_tasks: BackgroundTasks):
     background_tasks.add_task(salvar_csv, "dadosImportacao.csv", dados)
     return dados
 
-@app.get("/comercializacao", response_model=List[ComercioEntrada], summary="Dados de Comercialização")
+@app.get("/comercializacao")
 def comercializacao(background_tasks: BackgroundTasks):
     dados = scrape_comercializacao_page()
-    background_tasks.add_task(salvar_csv, "dadosComercializacao.csv", dados)
+    background_tasks.add_task(salvar_csv, "comercializacao.csv", dados)
     return dados
+
