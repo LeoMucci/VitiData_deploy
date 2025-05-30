@@ -35,7 +35,7 @@ def exportacao(background_tasks: BackgroundTasks):
     background_tasks.add_task(salvar_csv, "dadosExportacao.csv", dados)
     return dados
 
-@app.get("/processamento", response_model=List[ComercioEntrada], summary="Dados de Processamento")
+@app.get("/processamento")
 def processamento(background_tasks: BackgroundTasks):
     dados = scrape_all_processamento()
     background_tasks.add_task(salvar_csv, "dadosProcessamento.csv", dados)
