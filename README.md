@@ -198,8 +198,8 @@ Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICE
 
 ## 👨‍💻 Autores
 
-**Lucas Cardoso de Menezes - rm361695**
-**Leonardo Capra Mucci - rm363577**
-**Allyson Vinicius Lourenço de Jesus - rm364208**
-**Nathan Ballaré Lima - rm364060**
+-Lucas Cardoso de Menezes - rm361695
+-Leonardo Capra Mucci - rm363577
+-Allyson Vinicius Lourenço de Jesus - rm364208
+-Nathan Ballaré Lima - rm364060
 ---
