@@ -1,3 +1,4 @@
+from flask import Flask, jsonify
 from app.scraper import (
     scrape_producao_pages,
     scrape_exportacao,
@@ -6,37 +7,35 @@ from app.scraper import (
     scrape_comercializacao_page
 )
 
-def menu():
-    print("\n=== VitiData Scraper ===")
-    print("1 - Produção")
-    print("2 - Exportação")
-    print("3 - Processamento")
-    print("4 - Importação")
-    print("5 - Comercialização")
-    print("0 - Sair")
+app = Flask(__name__)
 
-    opcao = input("Escolha uma opção: ")
-    return opcao
+@app.route('/healthz')
+def health():
+    return "OK", 200
 
-if __name__ == "__main__":
-    while True:
-        opcao = menu()
+@app.route('/producao')
+def producao():
+    dados = scrape_producao_pages()
+    return jsonify(dados)
 
-        if opcao == "1":
-            dados = scrape_producao_pages()
-        elif opcao == "2":
-            dados = scrape_exportacao()
-        elif opcao == "3":
-            dados = scrape_all_processamento()
-        elif opcao == "4":
-            dados = scrape_importacao()
-        elif opcao == "5":
-            dados = scrape_comercializacao_page()
-        elif opcao == "0":
-            print("Encerrando.")
-            break
-        else:
-            print("Opção inválida.")
-            continue
+@app.route('/exportacao')
+def exportacao():
+    dados = scrape_exportacao()
+    return jsonify(dados)
 
-        print(f"\nTotal de registros obtidos: {len(dados)}\n")
+@app.route('/processamento')
+def processamento():
+    dados = scrape_all_processamento()
+    return jsonify(dados)
+
+@app.route('/importacao')
+def importacao():
+    dados = scrape_importacao()
+    return jsonify(dados)
+
+@app.route('/comercializacao')
+def comercializacao():
+    dados = scrape_comercializacao_page()
+    return jsonify(dados)
+
+# NÃO usar app.run() aqui — o Docker usará gunicorn para isso
