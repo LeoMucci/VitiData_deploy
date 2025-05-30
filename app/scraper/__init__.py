@@ -1,4 +1,4 @@
-from .importacao import coletarTudo as scrape_importacao
+from .importacao import scrape_importacao
 from .exportacao import scrape_exportacao
 from .processamento import scrape_all_processamento
 from .producao import scrape_producao_pages
