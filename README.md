@@ -20,18 +20,6 @@ Este sistema extrai dados em tempo real do portal [Embrapa VitiBrasil](http://vi
 
 ---
 
-## 🏗️ Arquitetura da Solução
-
-```mermaid
-graph TB
-    A[Embrapa VitiBrasil] --> B[Web Scraper]
-    B --> C[Data Processing]
-    C --> D[FastAPI REST Endpoints]
-    D --> E[Machine Learning Models]
-    D --> F[Business Intelligence]
-    D --> G[Data Analytics]
-```
-
 ### Componentes Principais:
 
 1. **Web Scraper**: Selenium + BeautifulSoup para extração automatizada
@@ -210,9 +198,8 @@ Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICE
 
 ## 👨‍💻 Autores
 
-**Matheus Pavani**
-- GitHub: [@seu-usuario](https://github.com/seu-usuario)
-- LinkedIn: [Seu Perfil](https://linkedin.com/in/seu-perfil)
-- Email: seu-email@exemplo.com
-
+**Lucas Cardoso de Menezes - rm361695**
+**Leonardo Capra Mucci - rm363577**
+**Allyson Vinicius Lourenço de Jesus - rm364208**
+**Nathan Ballaré Lima - rm364060**
 ---
