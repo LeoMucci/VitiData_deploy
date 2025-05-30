@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from fastapi import FastAPI
 from app.scraper import (
     scrape_producao_pages,
     scrape_exportacao,
@@ -7,35 +7,28 @@ from app.scraper import (
     scrape_comercializacao_page
 )
 
-app = Flask(__name__)
+app = FastAPI(title="VitiData API")
 
-@app.route('/healthz')
+@app.get("/healthz")
 def health():
-    return "OK", 200
+    return {"status": "OK"}
 
-@app.route('/producao')
+@app.get("/producao")
 def producao():
-    dados = scrape_producao_pages()
-    return jsonify(dados)
+    return scrape_producao_pages()
 
-@app.route('/exportacao')
+@app.get("/exportacao")
 def exportacao():
-    dados = scrape_exportacao()
-    return jsonify(dados)
+    return scrape_exportacao()
 
-@app.route('/processamento')
+@app.get("/processamento")
 def processamento():
-    dados = scrape_all_processamento()
-    return jsonify(dados)
+    return scrape_all_processamento()
 
-@app.route('/importacao')
+@app.get("/importacao")
 def importacao():
-    dados = scrape_importacao()
-    return jsonify(dados)
+    return scrape_importacao()
 
-@app.route('/comercializacao')
+@app.get("/comercializacao")
 def comercializacao():
-    dados = scrape_comercializacao_page()
-    return jsonify(dados)
-
-# NÃO usar app.run() aqui — o Docker usará gunicorn para isso
+    return scrape_comercializacao_page()
