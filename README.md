@@ -251,10 +251,10 @@ A aplicação está hospedada no **Render** com as seguintes configurações:
 
 | Nome | RM | GitHub | LinkedIn |
 |------|----|---------|-----------| 
-| **Lucas Cardoso de Menezes** | RM361695 | [@luccamenezes](https://github.com/luccamenezes) | [LinkedIn](https://linkedin.com/in/luccamenezes) |
-| **Leonardo Capra Mucci** | RM363577 | [@leonardocapra](https://github.com/leonardocapra) | [LinkedIn](https://linkedin.com/in/leonardocapra) |
-| **Allyson Vinicius Lourenço de Jesus** | RM364208 | [@allysonvinicius](https://github.com/allysonvinicius) | [LinkedIn](https://linkedin.com/in/allysonvinicius) |
-| **Nathan Ballaré Lima** | RM364060 | [@nathanballare](https://github.com/nathanballare) | [LinkedIn](https://linkedin.com/in/nathanballare) |
+| **Lucas Cardoso de Menezes** | RM361695 | 
+| **Leonardo Capra Mucci** | RM363577 | 
+| **Allyson Vinicius Lourenço de Jesus** | RM364208 | 
+| **Nathan Ballaré Lima** | RM364060 | 
 
 ### 🏫 Instituição
 **FIAP - Faculdade de Informática e Administração Paulista**  
