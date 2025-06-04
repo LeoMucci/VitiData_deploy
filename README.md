@@ -40,23 +40,6 @@ Uma API RESTful que:
 
 ---
 
-## 🏗️ Arquitetura da Solução
-
-```mermaid
-graph TB
-    A[🌐 Embrapa VitiBrasil] --> B[🤖 Web Scraper]
-    B --> C[🔄 Data Processing]
-    C --> D[📊 Pandas DataFrame]
-    D --> E[✅ Pydantic Validation]
-    E --> F[🚀 FastAPI Endpoints]
-
-    
-    style A fill:#e1f5fe
-    style F fill:#c8e6c9
-    style G fill:#fff3e0
-    style H fill:#f3e5f5
-    style I fill:#fce4ec
-```
 
 ### 🧱 Componentes da Arquitetura
 
