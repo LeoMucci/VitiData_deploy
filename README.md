@@ -4,201 +4,318 @@
 [![FastAPI](https://img.shields.io/badge/FastAPI-Latest-green.svg)](https://fastapi.tiangolo.com)
 [![Docker](https://img.shields.io/badge/Docker-Enabled-blue.svg)](https://docker.com)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Deploy](https://img.shields.io/badge/Deploy-Render-purple.svg)](https://render.com)
+
+> **Tech Challenge - Fase 1 | Machine Learning Engineering**  
+> Solução desenvolvida para democratizar o acesso aos dados oficiais de vitivinicultura brasileira da Embrapa
+
+---
 
 ## 📋 Sobre o Projeto
 
-O **VitiData API** é uma solução completa para coleta, processamento e disponibilização de dados de vitivinicultura do Brasil, desenvolvida como parte do **Tech Challenge - Fase 1** do curso de Machine Learning Engineering. 
+O **VitiData API** é uma API RESTful robusta e documentada que automatiza a extração e disponibilização de dados históricos de vitivinicultura do portal [Embrapa VitiBrasil](http://vitibrasil.cnpuv.embrapa.br). 
 
-Este sistema extrai dados em tempo real do portal [Embrapa VitiBrasil](http://vitibrasil.cnpuv.embrapa.br), transformando informações dispersas em uma API REST estruturada e documentada, pronta para alimentar modelos de Machine Learning e análises estratégicas do setor vitivinícola.
-
-### 🎯 Objetivos do Projeto
-
-- **Democratizar o acesso** aos dados oficiais de vitivinicultura brasileira
-- **Criar uma fonte confiável** para análises de mercado e pesquisas acadêmicas  
-- **Estabelecer base de dados** para futuros modelos de Machine Learning
-- **Facilitar integração** com sistemas de BI e dashboards analíticos
+Desenvolvida como solução para o **Tech Challenge da FIAP**, esta API transforma dados dispersos em endpoints estruturados, prontos para alimentar modelos de Machine Learning, sistemas de BI e análises estratégicas do setor vitivinícola brasileiro.
 
 ---
 
-### Componentes Principais:
+## 🎯 Problema e Contexto
 
-1. **Web Scraper**: Selenium + BeautifulSoup para extração automatizada
-2. **Data Processing**: Pandas para limpeza e estruturação dos dados
-3. **REST API**: FastAPI para exposição dos endpoints
-4. **Containerização**: Docker para padronização de ambiente
-5. **Deploy**: Render para hospedagem em nuvem
+### 📌 O Desafio
+A vitivinicultura brasileira possui um rico acervo de dados históricos desde 1970 no portal da Embrapa, abrangendo:
+- **Produção** por região e tipo de uva
+- **Processamento** de vinhos e derivados  
+- **Comercialização** no mercado interno
+- **Importação** de produtos vitivinícolas
+- **Exportação** para mercados internacionais
 
----
+**Problema**: Esses dados não são expostos via API pública, dificultando integração com sistemas analíticos e modelos de ML.
 
-## 🔧 Stack Tecnológica
-
-| Categoria | Tecnologia | Versão | Propósito |
-|-----------|------------|---------|-----------|
-| **Backend** | Python | 3.11 | Linguagem principal |
-| **API Framework** | FastAPI | Latest | Framework web moderno |
-| **Web Server** | Uvicorn | Latest | Servidor ASGI |
-| **Web Scraping** | Selenium | Latest | Automação de navegador |
-| **HTML Parsing** | BeautifulSoup4 | Latest | Extração de dados HTML |
-| **Data Processing** | Pandas | Latest | Manipulação de dados |
-| **Containerização** | Docker | Latest | Ambiente padronizado |
-| **Deploy** | Render | - | Plataforma de hospedagem |
+### 🚀 Nossa Solução
+Uma API RESTful que:
+- ✅ **Automatiza** a extração de dados via web scraping
+- ✅ **Padroniza** os dados em formato JSON estruturado
+- ✅ **Documenta** todos os endpoints com Swagger/OpenAPI
+- ✅ **Disponibiliza** acesso público e gratuito
 
 ---
 
-## 📊 Endpoints Disponíveis
+## 🏗️ Arquitetura da Solução
 
-### Base URL: `https://your-app-name.onrender.com`
+```mermaid
+graph TB
+    A[🌐 Embrapa VitiBrasil] --> B[🤖 Web Scraper]
+    B --> C[🔄 Data Processing]
+    C --> D[📊 Pandas DataFrame]
+    D --> E[✅ Pydantic Validation]
+    E --> F[🚀 FastAPI Endpoints]
+
+    
+    style A fill:#e1f5fe
+    style F fill:#c8e6c9
+    style G fill:#fff3e0
+    style H fill:#f3e5f5
+    style I fill:#fce4ec
+```
+
+### 🧱 Componentes da Arquitetura
+
+| Camada | Tecnologia | Responsabilidade |
+|--------|------------|------------------|
+| **Extração** | Selenium + BeautifulSoup | Web scraping automatizado |
+| **Processamento** | Pandas | Limpeza e estruturação de dados |
+| **Validação** | Pydantic | Garantia de qualidade dos dados |
+| **API** | FastAPI | Interface REST documentada |
+| **Deploy** | Docker + Render | Containerização e hospedagem |
+
+---
+
+## ⚙️ Stack Tecnológica Completa
+
+### Backend & Core
+- **Python 3.11** - Linguagem principal
+- **FastAPI** - Framework web moderno e performático
+- **Uvicorn** - Servidor ASGI de alta performance
+- **Pydantic** - Validação de dados e serialização
+
+### Web Scraping & Data
+- **Selenium WebDriver** - Automação de navegador
+- **BeautifulSoup4** - Parser HTML/XML
+- **Pandas** - Manipulação e análise de dados
+- **Requests** - Cliente HTTP
+
+### DevOps & Deploy
+- **Docker** - Containerização da aplicação
+- **Render** - Plataforma de deploy em nuvem
+
+
+---
+
+## 📊 Endpoints da API
+
+### 🌐 Base URL
+**Produção**: `https://vitidata-api.onrender.com`  
+**Local**: `http://localhost:8000`
+
+### 📋 Lista Completa de Endpoints
 
 | Método | Endpoint | Descrição | Dados Retornados |
 |--------|----------|-----------|------------------|
-| `GET` | `/` | Página inicial da API | Informações básicas |
-| `GET` | `/healthz` | Health check do serviço | Status da aplicação |
-| `GET` | `/producao` | Dados de produção vinícola | Produção por região/ano |
-| `GET` | `/processamento` | Dados de processamento | Volume processado |
-| `GET` | `/comercializacao` | Dados de comercialização | Vendas no mercado interno |
-| `GET` | `/importacao` | Dados de importação | Produtos importados |
-| `GET` | `/exportacao` | Dados de exportação | Produtos exportados |
-| `GET` | `/docs` | Documentação interativa | Swagger UI |
-| `GET` | `/redoc` | Documentação alternativa | ReDoc UI |
+| `GET` | `/` | 🏠 Página inicial | Informações da API |
+| `GET` | `/healthz` | 💚 Health check | Status da aplicação |
+| `GET` | `/producao` | 🍇 Dados de produção | Produção por região/ano/tipo |
+| `GET` | `/processamento` | ⚙️ Processamento | Volume processado por tipo |
+| `GET` | `/comercializacao` | 🛒 Comercialização | Vendas mercado interno |
+| `GET` | `/importacao` | 📥 Importação | Produtos importados por país |
+| `GET` | `/exportacao` | 📤 Exportação | Produtos exportados |
+| `GET` | `/docs` | 📚 Documentação Swagger | Interface interativa |
+| `GET` | `/redoc` | 📖 Documentação ReDoc | Documentação alternativa |
 
-### 📝 Exemplo de Resposta
+### 📄 Exemplo de Resposta JSON
 
 ```json
 {
-  "status": "success",
+  "success": true,
   "data": [
     {
       "ano": 2023,
-      "produto": "Vinho de Mesa",
+      "produto": "Vinho de Mesa Tinto",
       "quantidade": 123456789,
-      "unidade": "litros"
+      "unidade": "litros",
+      "regiao": "Rio Grande do Sul"
+    },
+    {
+      "ano": 2023,
+      "produto": "Vinho Fino Branco", 
+      "quantidade": 45678901,
+      "unidade": "litros",
+      "regiao": "Vale dos Vinhedos"
     }
   ],
   "total_records": 150,
   "source": "Embrapa VitiBrasil",
-  "last_updated": "2024-03-15T10:30:00Z"
+  "extracted_at": "2024-03-15T10:30:00Z",
+  "api_version": "1.0.0"
 }
 ```
 
 ---
 
-## 🚀 Guia de Instalação e Uso
-
-### Pré-requisitos
-
-- Python 3.11+
-- Git
-- Docker (opcional)
+## 🚀 Guia de Instalação
 
 ### 💻 Instalação Local
 
-1. **Clone o repositório**
+#### 1️⃣ Clone o Repositório
 ```bash
-git clone https://github.com/seu-usuario/VitiData.git
+git clone https://github.com/luccamenezes/VitiData.git
 cd VitiData
 ```
 
-2. **Configure o ambiente virtual**
+#### 2️⃣ Configure Ambiente Virtual
 ```bash
+# Criar ambiente virtual
 python -m venv venv
-source venv/bin/activate  # Linux/Mac
-# ou
-venv\Scripts\activate     # Windows
+
+# Ativar ambiente virtual
+# Windows
+venv\Scripts\activate
+# Linux/Mac  
+source venv/bin/activate
 ```
 
-3. **Instale as dependências**
+#### 3️⃣ Instalar Dependências
 ```bash
+pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-4. **Execute a aplicação**
+#### 4️⃣ Executar a Aplicação
 ```bash
+# Modo desenvolvimento (com reload)
 uvicorn run:app --reload --host 0.0.0.0 --port 8000
+
+# Modo produção
+uvicorn run:app --host 0.0.0.0 --port 8000
 ```
 
-5. **Acesse a documentação**
-   - Swagger UI: [http://localhost:8000/docs](http://localhost:8000/docs)
-   - ReDoc: [http://localhost:8000/redoc](http://localhost:8000/redoc)
+#### 5️⃣ Acessar a API
+- **Swagger UI**: [http://localhost:8000/docs](http://localhost:8000/docs)
+- **ReDoc**: [http://localhost:8000/redoc](http://localhost:8000/redoc)
+- **Health Check**: [http://localhost:8000/healthz](http://localhost:8000/healthz)
 
-### 🐳 Execução com Docker
-
-```bash
-# Build da imagem
-docker build -t vitidata-api .
-
-# Execução do container
-docker run -d -p 8000:8000 --name vitidata vitidata-api
-
-# Verificar logs
-docker logs vitidata
-```
-
-### ☁️ Acesso em Produção
-
-A API está disponível em produção através do Render:
-
-**URL Base**: `https://vitidata-api.onrender.com`
-
-**Documentação**: `https://vitidata-api.onrender.com/docs`
 
 ---
-
-## 📁 Estrutura do Projeto
-
-```
-VitiData/
-├── 📁 app/                     # Módulo principal da aplicação
-│   ├── 📄 __init__.py         # Inicialização do módulo
-│   ├── 📄 scraper.py          # Funções de web scraping
-│   ├── 📄 models.py           # Modelos de dados (Pydantic)
-│   └── 📄 utils.py            # Funções utilitárias
-├── 📄 run.py                   # Aplicação FastAPI principal
-├── 📄 requirements.txt         # Dependências Python
-├── 📄 Dockerfile              # Configuração Docker
-├── 📄 .gitignore              # Arquivos ignorados pelo Git
-└── 📄 README.md               # Este arquivo
-```
-
----
-
 
 ## 🧪 Testes e Validação
 
-### Executar Testes
+### 🌐 Testes Manuais da API
 
+#### Health Check
 ```bash
-# Instalar dependências de teste
-pip install pytest pytest-asyncio httpx
-
-# Executar todos os testes
-pytest
-
-# Executar com cobertura
-pytest --cov=app
+curl -X GET "https://vitidata-api.onrender.com/healthz"
 ```
 
-### Teste Manual dos Endpoints
-
+#### Dados de Produção
 ```bash
-# Verificar saúde da API
-curl https://vitidata-api.onrender.com/healthz
+curl -X GET "https://vitidata-api.onrender.com/producao" \
+  -H "accept: application/json"
+```
 
-# Obter dados de produção
-curl https://vitidata-api.onrender.com/producao
+#### Usando Python
+```python
+import requests
+
+# Testar endpoint de produção
+response = requests.get("https://vitidata-api.onrender.com/producao")
+data = response.json()
+print(f"Status: {response.status_code}")
+print(f"Records: {len(data.get('data', []))}")
 ```
 
 ---
 
+## 🗂️ Estrutura do Projeto
 
-## 📄 Licença
+```
+VitiData/
+├── 📁 app/                      # 📦 Módulo principal da aplicação
+│   ├── 📄 __init__.py          # Inicialização do módulo
+│   ├── 📄 scraper.py           # 🤖 Funções de web scraping
+│   ├── 📄 models.py            # 📋 Modelos Pydantic
+│   ├── 📄 utils.py             # 🔧 Funções utilitárias
+│   └── 📄 config.py            # ⚙️ Configurações da aplicação
+├── 📁 tests/                    # 🧪 Testes automatizados
+│   ├── 📄 __init__.py          # Inicialização dos testes
+│   ├── 📄 test_endpoints.py    # 🌐 Testes dos endpoints
+│   ├── 📄 test_scraper.py      # 🤖 Testes do scraper
+│   └── 📄 conftest.py          # 🔧 Configurações do pytest
+├── 📁 docs/                     # 📚 Documentação adicional
+│   ├── 📄 api_guide.md         # Guia da API
+│   ├── 📄 deployment.md        # Guia de deploy
+│   └── 📄 contributing.md      # Guia de contribuição
+├── 📁 scripts/                  # 🔨 Scripts utilitários
+│   ├── 📄 test_production.py   # Teste da API em produção
+│   └── 📄 health_check.py      # Script de monitoramento
+├── 📄 run.py                    # 🚀 Aplicação FastAPI principal
+├── 📄 requirements.txt          # 📦 Dependências Python
+├── 📄 requirements-dev.txt      # 📦 Dependências de desenvolvimento
+├── 📄 Dockerfile               # 🐳 Configuração Docker
+├── 📄 docker-compose.yml       # 🐳 Orquestração de containers
+├── 📄 .dockerignore            # 🐳 Arquivos ignorados pelo Docker
+├── 📄 .gitignore               # 📁 Arquivos ignorados pelo Git
+├── 📄 .env.example             # 🔐 Exemplo de variáveis de ambiente
+├── 📄 pytest.ini               # 🧪 Configurações do pytest
+├── 📄 LICENSE                  # 📜 Licença do projeto
+└── 📄 README.md                # 📖 Este arquivo
+```
 
-Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICENSE) para detalhes.
 
 ---
 
+<<<<<<< HEAD
+## 🌐 Deploy e Produção
+
+### ☁️ Plataforma de Deploy
+A aplicação está hospedada no **Render** com as seguintes configurações:
+
+**URL de Produção**: `https://vitidata-api.onrender.com`
+
+=======
 ## 👨‍💻 Autores
 - Lucas Cardoso de Menezes - rm361695
 - Leonardo Capra Mucci - rm363577
 - Allyson Vinicius Lourenço de Jesus - rm364208
 - Nathan Ballaré Lima - rm364060
+>>>>>>> b7e55736661a5c29b800087da45717a71c075cbe
 ---
+
+## 👨‍💻 Equipe de Desenvolvimento
+
+### 🎓 Desenvolvedores
+
+| Nome | RM | GitHub | LinkedIn |
+|------|----|---------|-----------| 
+| **Lucas Cardoso de Menezes** | RM361695 | [@luccamenezes](https://github.com/luccamenezes) | [LinkedIn](https://linkedin.com/in/luccamenezes) |
+| **Leonardo Capra Mucci** | RM363577 | [@leonardocapra](https://github.com/leonardocapra) | [LinkedIn](https://linkedin.com/in/leonardocapra) |
+| **Allyson Vinicius Lourenço de Jesus** | RM364208 | [@allysonvinicius](https://github.com/allysonvinicius) | [LinkedIn](https://linkedin.com/in/allysonvinicius) |
+| **Nathan Ballaré Lima** | RM364060 | [@nathanballare](https://github.com/nathanballare) | [LinkedIn](https://linkedin.com/in/nathanballare) |
+
+### 🏫 Instituição
+**FIAP - Faculdade de Informática e Administração Paulista**  
+**Curso**: Pós-Tech em Machine Learning Engineering  
+**Disciplina**: Tech Challenge - Fase 1
+
+---
+
+
+
+## 📜 Licença
+
+Este projeto está licenciado sob a **Licença MIT** - veja o arquivo [LICENSE](LICENSE) para detalhes completos.
+
+```
+MIT License
+
+Copyright (c) 2024 VitiData Team
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+```
+
+
+---
+
+
+<div align="center">
+
+
+**[⬆ Voltar ao topo](#-vitidata-api---sistema-de-análise-de-dados-vitivinícolas)**
+
+</div>
