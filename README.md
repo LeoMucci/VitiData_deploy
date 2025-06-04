@@ -197,41 +197,34 @@ print(f"Records: {len(data.get('data', []))}")
 
 ---
 
-## 🗂️ Estrutura do Projeto
+# 🗂️ Estrutura do Projeto
 
 ```
-VitiData/
-├── 📁 app/                      # 📦 Módulo principal da aplicação
-│   ├── 📄 __init__.py          # Inicialização do módulo
-│   ├── 📄 scraper.py           # 🤖 Funções de web scraping
-│   ├── 📄 models.py            # 📋 Modelos Pydantic
-│   ├── 📄 utils.py             # 🔧 Funções utilitárias
-│   └── 📄 config.py            # ⚙️ Configurações da aplicação
-├── 📁 tests/                    # 🧪 Testes automatizados
-│   ├── 📄 __init__.py          # Inicialização dos testes
-│   ├── 📄 test_endpoints.py    # 🌐 Testes dos endpoints
-│   ├── 📄 test_scraper.py      # 🤖 Testes do scraper
-│   └── 📄 conftest.py          # 🔧 Configurações do pytest
-├── 📁 docs/                     # 📚 Documentação adicional
-│   ├── 📄 api_guide.md         # Guia da API
-│   ├── 📄 deployment.md        # Guia de deploy
-│   └── 📄 contributing.md      # Guia de contribuição
-├── 📁 scripts/                  # 🔨 Scripts utilitários
-│   ├── 📄 test_production.py   # Teste da API em produção
-│   └── 📄 health_check.py      # Script de monitoramento
-├── 📄 run.py                    # 🚀 Aplicação FastAPI principal
-├── 📄 requirements.txt          # 📦 Dependências Python
-├── 📄 requirements-dev.txt      # 📦 Dependências de desenvolvimento
-├── 📄 Dockerfile               # 🐳 Configuração Docker
-├── 📄 docker-compose.yml       # 🐳 Orquestração de containers
-├── 📄 .dockerignore            # 🐳 Arquivos ignorados pelo Docker
-├── 📄 .gitignore               # 📁 Arquivos ignorados pelo Git
-├── 📄 .env.example             # 🔐 Exemplo de variáveis de ambiente
-├── 📄 pytest.ini               # 🧪 Configurações do pytest
-├── 📄 LICENSE                  # 📜 Licença do projeto
-└── 📄 README.md                # 📖 Este arquivo
+VITIDATA_DF.../
+├── 📁 app/
+│   ├── 📁 __pycache__/
+│   │   └── 📄 __init__.cpython-313.pyc
+│   └── 📁 routes/
+│       ├── 📁 __pycache__/
+│       └── 📄 routes.py
+├── 📁 schemas/
+│   └── 📄 vinho.py
+├── 📁 scraper/
+│   ├── 📄 __init__.py
+│   ├── 📄 comercializacao.py
+│   ├── 📄 exportacao.py
+│   ├── 📄 importacao.py
+│   ├── 📄 processamento.py
+│   └── 📄 producao.py
+├── 📁 static/
+│   ├── 📄 __init__.py
+│   ├── 📄 auth.py
+│   └── 📄 models.py
+├── 📄 Dockerfile
+├── 📄 README.md
+├── 📄 requirements.txt
+└── 📄 run.py
 ```
-
 
 ---
 
